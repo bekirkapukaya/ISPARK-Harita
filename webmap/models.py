@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.gis.db import models as geomodels
 
 class Ispark(models.Model):
     id = models.AutoField(
@@ -30,4 +31,4 @@ class Ispark(models.Model):
     freeParkingTime = models.PositiveSmallIntegerField(verbose_name='Ücretsiz Parklanma Süresi (dakika)')
     price = models.CharField(max_length=700, verbose_name='Tarifesi')
     parkAndGoPoint = models.PositiveSmallIntegerField(verbose_name='Park Et Devam Et Noktası')
-
+    geom = geomodels.PointField(verbose_name="Geometri")

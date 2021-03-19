@@ -21,5 +21,6 @@ from webmap import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('updatedb', views.updateDatabase),
-    path('map', views.mapPage)
+    path('map', views.mapPage),
+    path('getpoints', views.getPoints)
 ]

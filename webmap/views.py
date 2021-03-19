@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.core.serializers import serialize
 
 from django.views.decorators.csrf import csrf_exempt
 from .models import Ispark
@@ -14,35 +15,44 @@ def updateDatabase(request):
     jsonData = rawData.json()
     duraklar = jsonData["result"]["records"]
     for durak in duraklar:
-        guncelDuraklar = Ispark(
-            parkId=durak["Park ID"],
-            parkName=durak["Park Adi"],
-            locationId=durak["Lokasyon ID"],
-            locationCode=durak["Lokasyon Kodu"],
-            locationName=durak["Lokasyon Adi"],
-            parkTypeId=durak["Park Tipi ID"],
-            parkType=durak["Park Tipi"],
-            parkCapacity=durak["Park Kapasitesi"],
-            workHours=durak["Calisma Saatleri"],
-            regionId=durak["Bolge ID"],
-            region=durak["Bolge"],
-            subRegionId=durak["Alt Bolge ID"],
-            subRegion=durak["Alt Bolge"],
-            boroughld=durak["Ilce ID"],
-            borough=durak["Ilce"],
-            address=durak["Adres"],
-            point=durak["Enlem/Boylam"],
-            polygon=durak["Polygon Verisi"],
-            lat=durak["Boylam"],
-            lon=durak["Enlem"],
-            monthlyPrice=durak["Aylik Abonelik Ucreti"],
-            freeParkingTime=durak["Ucretsiz Parklanma Suresi (dakika)"],
-            price=durak["Tarifesi"],
-            parkAndGoPoint=durak["Park Et Devam Et Noktasi"])
-        guncelDuraklar.save()
+        if durak["Enlem/Boylam"] != "":
+            guncelDuraklar = Ispark(
+                parkId=durak["Park ID"],
+                parkName=durak["Park Adi"],
+                locationId=durak["Lokasyon ID"],
+                locationCode=durak["Lokasyon Kodu"],
+                locationName=durak["Lokasyon Adi"],
+                parkTypeId=durak["Park Tipi ID"],
+                parkType=durak["Park Tipi"],
+                parkCapacity=durak["Park Kapasitesi"],
+                workHours=durak["Calisma Saatleri"],
+                regionId=durak["Bolge ID"],
+                region=durak["Bolge"],
+                subRegionId=durak["Alt Bolge ID"],
+                subRegion=durak["Alt Bolge"],
+                boroughld=durak["Ilce ID"],
+                borough=durak["Ilce"],
+                address=durak["Adres"],
+                point=durak["Enlem/Boylam"],
+                polygon=durak["Polygon Verisi"],
+                lat=durak["Boylam"],
+                lon=durak["Enlem"],
+                monthlyPrice=durak["Aylik Abonelik Ucreti"],
+                freeParkingTime=durak["Ucretsiz Parklanma Suresi (dakika)"],
+                price=durak["Tarifesi"],
+                parkAndGoPoint=durak["Park Et Devam Et Noktasi"],
+                geom=durak["Enlem/Boylam"])
+            guncelDuraklar.save()
 
     return redirect("/map")
 
 
 def mapPage(request):
     return render(request, "map.html")
+
+
+@csrf_exempt
+def getPoints(request):
+    points = Ispark.objects.all()
+    data = serialize("geojson", points, geometry_field='geom', srid=4326)
+    return HttpResponse(data)

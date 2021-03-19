@@ -10,6 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
+os.environ['PATH'] = "C:\Tools\Python36\Lib\site-packages\osgeo"
+os.environ['PROJ_LIB'] = "C:\Tools\Python36\Lib\site-packages\osgeo\data\proj"
+GDAL_LIBRARY_PATH = "C:\Tools\Python36\Lib\site-packages\osgeo\gdal301.dll"
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'webmap'
 ]
 
@@ -68,6 +74,10 @@ TEMPLATES = [
     },
 ]
 
+SERIALIZATION_MODULES = {
+    "geojson": "django.contrib.gis.serializers.geojson", 
+}
+
 WSGI_APPLICATION = 'isparkmap.wsgi.application'
 
 
@@ -76,7 +86,7 @@ WSGI_APPLICATION = 'isparkmap.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': "gis",
         'USER': "postgres",
         'PASSWORD': "+",
