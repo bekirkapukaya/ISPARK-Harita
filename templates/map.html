@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>İspark Durak Haritası</title>
   </head>
-  <link rel="stylesheet" href="../static/css/style.css">
-  <link rel="stylesheet" href="../static/css/esri.css">
+  <link rel="stylesheet" href="../static/css/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://js.arcgis.com/4.18/esri/themes/dark-blue/main.css"
+  />
   <script src="https://js.arcgis.com/4.18/"></script>
   <script src="../static/js/esri.js"></script>
   <body>
     <div id="viewDiv"></div>
+    <div id="infoDiv" class="esri-widget">
+      <button id="cluster" class="esri-button">Disable Clustering</button>
+      <div id="legendDiv"></div>
+    </div>
   </body>
 </html>

@@ -13,36 +13,73 @@ IBB_API = "https://data.ibb.gov.tr/api/3/action/datastore_search?resource_id=c3e
 def updateDatabase(request):
     rawData = requests.get(IBB_API)
     jsonData = rawData.json()
-    duraklar = jsonData["result"]["records"]
-    for durak in duraklar:
-        if durak["Enlem/Boylam"] != "":
-            guncelDuraklar = Ispark(
-                parkId=durak["Park ID"],
-                parkName=durak["Park Adi"],
-                locationId=durak["Lokasyon ID"],
-                locationCode=durak["Lokasyon Kodu"],
-                locationName=durak["Lokasyon Adi"],
-                parkTypeId=durak["Park Tipi ID"],
-                parkType=durak["Park Tipi"],
-                parkCapacity=durak["Park Kapasitesi"],
-                workHours=durak["Calisma Saatleri"],
-                regionId=durak["Bolge ID"],
-                region=durak["Bolge"],
-                subRegionId=durak["Alt Bolge ID"],
-                subRegion=durak["Alt Bolge"],
-                boroughld=durak["Ilce ID"],
-                borough=durak["Ilce"],
-                address=durak["Adres"],
-                point=durak["Enlem/Boylam"],
-                polygon=durak["Polygon Verisi"],
-                lat=durak["Boylam"],
-                lon=durak["Enlem"],
-                monthlyPrice=durak["Aylik Abonelik Ucreti"],
-                freeParkingTime=durak["Ucretsiz Parklanma Suresi (dakika)"],
-                price=durak["Tarifesi"],
-                parkAndGoPoint=durak["Park Et Devam Et Noktasi"],
-                geom=durak["Enlem/Boylam"])
-            guncelDuraklar.save()
+    apiDuraklar = jsonData["result"]["records"]
+    dbDuraklar = Ispark.objects.values()
+    print(len(dbDuraklar))
+    if len(dbDuraklar) != 0:
+        for apiDurak in apiDuraklar:
+            for dbDurak in dbDuraklar:
+                if apiDurak["Enlem/Boylam"] == dbDurak["point"] and apiDurak["Enlem/Boylam"] != "":
+                    print(apiDurak["Park Adi"])
+                    """
+                    guncelDuraklar = Ispark(
+                        parkId=apiDurak["Park ID"],
+                        parkName=apiDurak["Park Adi"],
+                        locationId=apiDurak["Lokasyon ID"],
+                        locationCode=apiDurak["Lokasyon Kodu"],
+                        locationName=apiDurak["Lokasyon Adi"],
+                        parkTypeId=apiDurak["Park Tipi ID"],
+                        parkType=apiDurak["Park Tipi"],
+                        parkCapacity=apiDurak["Park Kapasitesi"],
+                        workHours=apiDurak["Calisma Saatleri"],
+                        regionId=apiDurak["Bolge ID"],
+                        region=apiDurak["Bolge"],
+                        subRegionId=apiDurak["Alt Bolge ID"],
+                        subRegion=apiDurak["Alt Bolge"],
+                        boroughld=apiDurak["Ilce ID"],
+                        borough=apiDurak["Ilce"],
+                        address=apiDurak["Adres"],
+                        point=apiDurak["Enlem/Boylam"],
+                        polygon=apiDurak["Polygon Verisi"],
+                        lat=apiDurak["Boylam"],
+                        lon=apiDurak["Enlem"],
+                        monthlyPrice=apiDurak["Aylik Abonelik Ucreti"],
+                        freeParkingTime=apiDurak["Ucretsiz Parklanma Suresi (dakika)"],
+                        price=apiDurak["Tarifesi"],
+                        parkAndGoPoint=apiDurak["Park Et Devam Et Noktasi"],
+                        geom=apiDurak["Enlem/Boylam"])
+                    guncelDuraklar.save()
+                    """
+    else:
+        for apiDurak in apiDuraklar:
+            if apiDurak["Enlem/Boylam"] != "":
+                guncelDuraklar = Ispark(
+                    parkId=apiDurak["Park ID"],
+                    parkName=apiDurak["Park Adi"],
+                    locationId=apiDurak["Lokasyon ID"],
+                    locationCode=apiDurak["Lokasyon Kodu"],
+                    locationName=apiDurak["Lokasyon Adi"],
+                    parkTypeId=apiDurak["Park Tipi ID"],
+                    parkType=apiDurak["Park Tipi"],
+                    parkCapacity=apiDurak["Park Kapasitesi"],
+                    workHours=apiDurak["Calisma Saatleri"],
+                    regionId=apiDurak["Bolge ID"],
+                    region=apiDurak["Bolge"],
+                    subRegionId=apiDurak["Alt Bolge ID"],
+                    subRegion=apiDurak["Alt Bolge"],
+                    boroughld=apiDurak["Ilce ID"],
+                    borough=apiDurak["Ilce"],
+                    address=apiDurak["Adres"],
+                    point=apiDurak["Enlem/Boylam"],
+                    polygon=apiDurak["Polygon Verisi"],
+                    lat=apiDurak["Boylam"],
+                    lon=apiDurak["Enlem"],
+                    monthlyPrice=apiDurak["Aylik Abonelik Ucreti"],
+                    freeParkingTime=apiDurak["Ucretsiz Parklanma Suresi (dakika)"],
+                    price=apiDurak["Tarifesi"],
+                    parkAndGoPoint=apiDurak["Park Et Devam Et Noktasi"],
+                    geom=apiDurak["Enlem/Boylam"])
+                guncelDuraklar.save()
 
     return redirect("/map")
 
