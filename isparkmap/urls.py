@@ -22,5 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('updatedb', views.updateDatabase),
     path('map', views.mapPage),
-    path('getpoints', views.getPoints)
+    path('getpoints', views.getPoints),
+    path('updatepoint/<int:id>', views.updatePoint),
+    path('deletepoint/<int:id>', views.deletePoint)
 ]

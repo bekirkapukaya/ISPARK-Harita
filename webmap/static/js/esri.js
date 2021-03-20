@@ -6,7 +6,19 @@ require([
   'esri/widgets/Legend',
   'esri/widgets/Expand',
   'esri/widgets/Home',
-], function (esriConfig, Map, MapView, GeoJSONLayer, Legend, Expand, Home) {
+  'esri/PopupTemplate',
+  'esri/popup/content/CustomContent',
+], function (
+  esriConfig,
+  Map,
+  MapView,
+  GeoJSONLayer,
+  Legend,
+  Expand,
+  Home,
+  PopupTemplate,
+  CustomContent
+) {
   esriConfig.apiKey =
     'AAPKf94de7daa0b74102b335646db409fe1eWPc-QIXS_ReACE9vzyHvvEO_ePxgewANyZ9yVKH40NMpFu6-1nv-ss3lXZrLvX-L';
 
@@ -154,6 +166,18 @@ require([
             },
           ],
         },
+        new CustomContent({
+          outFields: ['*'],
+          creator: function (event) {
+            let parkId = event.graphic.attributes.parkId;
+            let duzenleLink = document.createElement('a');
+            let linkText = document.createTextNode('Düzenle');
+            duzenleLink.appendChild(linkText);
+            duzenleLink.title = 'Düzenle';
+            duzenleLink.href = `http://localhost:8000/updatepoint/${parkId}`;
+            return duzenleLink;
+          },
+        }),
       ],
     },
     renderer: {

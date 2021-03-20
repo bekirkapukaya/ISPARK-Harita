@@ -93,3 +93,38 @@ def getPoints(request):
     points = Ispark.objects.all()
     data = serialize("geojson", points, geometry_field='geom', srid=4326)
     return HttpResponse(data)
+
+
+@csrf_exempt
+def updatePoint(request, id):
+    gecerliDurak = Ispark.objects.filter(parkId=id)
+    durakBilgileri = list(gecerliDurak)
+    context = {
+        "parkId": durakBilgileri[0].parkId,
+        "parkName": durakBilgileri[0].parkName,
+        "locationId": durakBilgileri[0].locationId,
+        "locationCode": durakBilgileri[0].locationCode,
+        "locationName": durakBilgileri[0].locationName,
+        "parkTypeId": durakBilgileri[0].parkTypeId,
+        "parkType": durakBilgileri[0].parkType,
+        "parkCapacity": durakBilgileri[0].parkCapacity,
+        "workHours": durakBilgileri[0].workHours,
+        "regionId": durakBilgileri[0].regionId,
+        "region": durakBilgileri[0].region,
+        "subRegionId": durakBilgileri[0].subRegionId,
+        "subRegion": durakBilgileri[0].subRegion,
+        "boroughld": durakBilgileri[0].boroughld,
+        "borough": durakBilgileri[0].borough,
+        "address": durakBilgileri[0].address,
+        "monthlyPrice": durakBilgileri[0].monthlyPrice,
+        "freeParkingTime": durakBilgileri[0].freeParkingTime,
+        "price": durakBilgileri[0].price,
+        "parkAndGoPoint": durakBilgileri[0].parkAndGoPoint,
+    }
+
+    return render(request, "editlocation.html", context)
+
+
+@csrf_exempt
+def deletePoint(request, id):
+    pass

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Durak Düzenle</title>
+  </head>
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+  <body>
+    <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Öznitelik Adı</th>
+            <th scope="col">Öznitelik Değeri</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Park ID</td>
+            <td><input type="text" value="{{parkId}}" disabled /></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Park Adı</td>
+            <td><input type="text" value="{{parkName}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Lokasyon ID</td>
+            <td><input type="text" value="{{locationId}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>Lokasyon Kodu</td>
+            <td><input type="text" value="{{locationCode}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">5</th>
+            <td>Lokasyon Adı</td>
+            <td><input type="text" value="{{locationName}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">6</th>
+            <td>Park Tipi ID</td>
+            <td><input type="text" value="{{parkTypeId}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">7</th>
+            <td>Park Tipi</td>
+            <td><input type="text" value="{{parkType}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>Park Kapasitesi</td>
+            <td><input type="text" value="{{parkCapacity}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">9</th>
+            <td>Calışma Saatleri</td>
+            <td><input type="text" value="{{workHours}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">10</th>
+            <td>Bölge ID</td>
+            <td><input type="text" value="{{regionId}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">11</th>
+            <td>Bölge</td>
+            <td><input type="text" value="{{region}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">12</th>
+            <td>Alt Bölge ID</td>
+            <td><input type="text" value="{{subRegionId}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">13</th>
+            <td>Alt Bölge</td>
+            <td><input type="text" value="{{subRegion}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">14</th>
+            <td>İlçe ID</td>
+            <td><input type="text" value="{{boroughld}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">15</th>
+            <td>İlçe</td>
+            <td><input type="text" value="{{borough}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">16</th>
+            <td>Adres</td>
+            <td><input type="text" value="{{address}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">17</th>
+            <td>Aylık Abonelik Ücreti</td>
+            <td><input type="text" value="{{monthlyPrice}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">18</th>
+            <td>Ücretsiz Parklanma Süresi (dakika)</td>
+            <td><input type="text" value="{{freeParkingTime}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">19</th>
+            <td>Tarifesi</td>
+            <td><input type="text" value="{{price}}" /></td>
+          </tr>
+          <tr>
+            <th scope="row">20</th>
+            <td>Park Et Devam Et Noktası</td>
+            <td><input type="text" value="{{parkAndGoPoint}}" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
