@@ -1,165 +1,22 @@
 {% extends "layout.html" %}
 
-{% block title %}
-Konumu Düzenle
-{% endblock title %}
-
 {% block body %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">İSPARK {{parkName}} Durağı</a>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto"></ul>
-    <div class="form-inline my-2 my-lg-0">
-      <button id="deleteButton" class="btn btn-danger my-2 my-sm-0">Sil</button>
-      <button id="updateButton" class="btn btn-success my-2 my-sm-0">
-        Güncelle
-      </button>
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <br>
+        <h3>İSPARK Durağı Güncelle</h3>
+        <hr>
+        <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form|crispy}}
+            <br>
+            <button style="width: 100%;" type = "submit" class = "btn btn-danger">Güncelle</button>
+        </form>
+        <br>
     </div>
   </div>
-</nav>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Öznitelik Adı</th>
-      <th scope="col">Öznitelik Değeri</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Park ID</td>
-      <td>
-        <input type="text" id="parkId" value="{{parkId}}" disabled />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Park Adı</td>
-      <td>
-        <input type="text" id="parkName" value="{{parkName}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Lokasyon ID</td>
-      <td>
-        <input type="text" id="locationId" value="{{locationId}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>Lokasyon Kodu</td>
-      <td>
-        <input type="text" id="locationCode" value="{{locationCode}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">5</th>
-      <td>Lokasyon Adı</td>
-      <td>
-        <input type="text" id="locationName" value="{{locationName}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">6</th>
-      <td>Park Tipi ID</td>
-      <td>
-        <input type="text" id="parkTypeId" value="{{parkTypeId}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">7</th>
-      <td>Park Tipi</td>
-      <td>
-        <input type="text" id="parkType" value="{{parkType}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">8</th>
-      <td>Park Kapasitesi</td>
-      <td>
-        <input type="text" id="parkCapacity" value="{{parkCapacity}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">9</th>
-      <td>Calışma Saatleri</td>
-      <td>
-        <input type="text" id="workHours" value="{{workHours}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">10</th>
-      <td>Bölge ID</td>
-      <td>
-        <input type="text" id="regionId" value="{{regionId}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">11</th>
-      <td>Bölge</td>
-      <td><input type="text" id="region" value="{{region}}" /></td>
-    </tr>
-    <tr>
-      <th scope="row">12</th>
-      <td>Alt Bölge ID</td>
-      <td>
-        <input type="text" id="subRegionId" value="{{subRegionId}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">13</th>
-      <td>Alt Bölge</td>
-      <td>
-        <input type="text" id="subRegion" value="{{subRegion}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">14</th>
-      <td>İlçe ID</td>
-      <td>
-        <input type="text" id="boroughld" value="{{boroughld}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">15</th>
-      <td>İlçe</td>
-      <td><input type="text" id="borough" value="{{borough}}" /></td>
-    </tr>
-    <tr>
-      <th scope="row">16</th>
-      <td>Adres</td>
-      <td><input type="text" id="address" value="{{address}}" /></td>
-    </tr>
-    <tr>
-      <th scope="row">17</th>
-      <td>Aylık Abonelik Ücreti</td>
-      <td>
-        <input type="text" id="monthlyPrice" value="{{monthlyPrice}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">18</th>
-      <td>Ücretsiz Parklanma Süresi (dakika)</td>
-      <td>
-        <input type="text" id="freeParkingTime" value="{{freeParkingTime}}" />
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">19</th>
-      <td>Tarifesi</td>
-      <td><input type="text" id="price" value="{{price}}" /></td>
-    </tr>
-    <tr>
-      <th scope="row">20</th>
-      <td>Park Et Devam Et Noktası</td>
-      <td>
-        <input type="text" id="parkAndGoPoint" value="{{parkAndGoPoint}}" />
-      </td>
-    </tr>
-  </tbody>
-</table>
 
-<script src="../static/js/editLocation.js"></script>
+
 {% endblock body %}

@@ -173,9 +173,25 @@ require([
             let duzenleLink = document.createElement('a');
             let linkText = document.createTextNode('Düzenle');
             duzenleLink.appendChild(linkText);
+            duzenleLink.className="btn btn-success"
+            duzenleLink.style="width:100%"
             duzenleLink.title = 'Düzenle';
             duzenleLink.href = `http://localhost:8000/map/editlocation/${parkId}`;
             return duzenleLink;
+          },
+        }),
+        new CustomContent({
+          outFields: ['*'],
+          creator: function (event) {
+            let parkId = event.graphic.attributes.parkId;
+            let silLink = document.createElement('a');
+            let linkText = document.createTextNode('Sil');
+            silLink.appendChild(linkText);
+            silLink.className="btn btn-danger"
+            silLink.style="width:100%"
+            silLink.title = 'Sil';
+            silLink.href = `http://localhost:8000/map/deletepoint/${parkId}`;
+            return silLink;
           },
         }),
       ],

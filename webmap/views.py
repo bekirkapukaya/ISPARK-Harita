@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.core.serializers import serialize
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .forms import IsparkForm
 
 from django.views.decorators.csrf import csrf_exempt
 from .models import Ispark
@@ -9,41 +11,28 @@ import requests
 
 IBB_API = "https://data.ibb.gov.tr/api/3/action/datastore_search?resource_id=c3eb0d72-1ce4-4983-a3a8-6b0b4b19fcb9"
 
+
 @login_required(login_url="user:login")
 def mapPage(request):
     return render(request, "map.html")
 
+
 @login_required(login_url="user:login")
 def editLocationPage(request, id):
-    gecerliDurak = Ispark.objects.filter(parkId=id)
-    durakBilgileri = list(gecerliDurak)
-    context = {
-        "parkId": durakBilgileri[0].parkId,
-        "parkName": durakBilgileri[0].parkName,
-        "locationId": durakBilgileri[0].locationId,
-        "locationCode": durakBilgileri[0].locationCode,
-        "locationName": durakBilgileri[0].locationName,
-        "parkTypeId": durakBilgileri[0].parkTypeId,
-        "parkType": durakBilgileri[0].parkType,
-        "parkCapacity": durakBilgileri[0].parkCapacity,
-        "workHours": durakBilgileri[0].workHours,
-        "regionId": durakBilgileri[0].regionId,
-        "region": durakBilgileri[0].region,
-        "subRegionId": durakBilgileri[0].subRegionId,
-        "subRegion": durakBilgileri[0].subRegion,
-        "boroughld": durakBilgileri[0].boroughld,
-        "borough": durakBilgileri[0].borough,
-        "address": durakBilgileri[0].address,
-        "monthlyPrice": durakBilgileri[0].monthlyPrice,
-        "freeParkingTime": durakBilgileri[0].freeParkingTime,
-        "price": durakBilgileri[0].price,
-        "parkAndGoPoint": durakBilgileri[0].parkAndGoPoint,
-    }
+    durak = get_object_or_404(Ispark, parkId=id)
+    form = IsparkForm(request.POST or None, instance=durak)
 
-    return render(request, "editlocation.html", context)
+    if form.is_valid():
+        durak = form.save()
+        durak.save()
+
+        messages.success(request, "Durak başarıyla güncellendi...")
+        return redirect("webmap:map")
+
+    return render(request, "editlocation.html", {"form": form})
 
 
-@csrf_exempt
+@login_required(login_url="user:login")
 def updateDatabase(request):
     rawData = requests.get(IBB_API)
     jsonData = rawData.json()
@@ -115,21 +104,19 @@ def updateDatabase(request):
                     geom=apiDurak["Enlem/Boylam"])
                 guncelDuraklar.save()
 
-    return redirect("/map")
+    return redirect("webmap:map")
 
 
-@csrf_exempt
+@login_required(login_url="user:login")
 def getPoints(request):
     points = Ispark.objects.all()
     data = serialize("geojson", points, geometry_field='geom', srid=4326)
     return HttpResponse(data)
 
 
-@csrf_exempt
-def updatePoint(request, id):
-    pass
-
-
-@csrf_exempt
+@login_required(login_url="user:login")
 def deletePoint(request, id):
-    print(id)
+    location = get_object_or_404(Ispark, parkId=id)
+    location.delete()
+    messages.success(request, "Durak başarıyla silindi...")
+    return redirect("webmap:map")
