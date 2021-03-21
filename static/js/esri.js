@@ -174,7 +174,7 @@ require([
             let linkText = document.createTextNode('Düzenle');
             duzenleLink.appendChild(linkText);
             duzenleLink.title = 'Düzenle';
-            duzenleLink.href = `http://localhost:8000/updatepoint/${parkId}`;
+            duzenleLink.href = `http://localhost:8000/editlocation/${parkId}`;
             return duzenleLink;
           },
         }),

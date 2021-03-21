@@ -23,6 +23,7 @@ urlpatterns = [
     path('updatedb', views.updateDatabase),
     path('map', views.mapPage),
     path('getpoints', views.getPoints),
+    path('editlocation/<int:id>', views.editLocation),
     path('updatepoint/<int:id>', views.updatePoint),
     path('deletepoint/<int:id>', views.deletePoint)
 ]

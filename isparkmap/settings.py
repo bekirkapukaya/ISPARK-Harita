@@ -10,12 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+from pathlib import Path
 import os
 os.environ['PATH'] = "C:\Tools\Python36\Lib\site-packages\osgeo"
 os.environ['PROJ_LIB'] = "C:\Tools\Python36\Lib\site-packages\osgeo\data\proj"
 GDAL_LIBRARY_PATH = "C:\Tools\Python36\Lib\site-packages\osgeo\gdal301.dll"
 
-from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,7 +75,7 @@ TEMPLATES = [
 ]
 
 SERIALIZATION_MODULES = {
-    "geojson": "django.contrib.gis.serializers.geojson", 
+    "geojson": "django.contrib.gis.serializers.geojson",
 }
 
 WSGI_APPLICATION = 'isparkmap.wsgi.application'
@@ -133,3 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]

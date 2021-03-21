@@ -96,7 +96,7 @@ def getPoints(request):
 
 
 @csrf_exempt
-def updatePoint(request, id):
+def editLocation(request, id):
     gecerliDurak = Ispark.objects.filter(parkId=id)
     durakBilgileri = list(gecerliDurak)
     context = {
@@ -126,5 +126,10 @@ def updatePoint(request, id):
 
 
 @csrf_exempt
-def deletePoint(request, id):
+def updatePoint(request, id):
     pass
+
+
+@csrf_exempt
+def deletePoint(request, id):
+    print(id)
