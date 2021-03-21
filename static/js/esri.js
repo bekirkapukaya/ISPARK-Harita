@@ -22,7 +22,7 @@ require([
   esriConfig.apiKey =
     'AAPKf94de7daa0b74102b335646db409fe1eWPc-QIXS_ReACE9vzyHvvEO_ePxgewANyZ9yVKH40NMpFu6-1nv-ss3lXZrLvX-L';
 
-  let url = 'http://localhost:8000/getpoints';
+  let url = 'http://localhost:8000/map/getpoints';
 
   const clusterConfig = {
     type: 'cluster',
@@ -174,7 +174,7 @@ require([
             let linkText = document.createTextNode('Düzenle');
             duzenleLink.appendChild(linkText);
             duzenleLink.title = 'Düzenle';
-            duzenleLink.href = `http://localhost:8000/editlocation/${parkId}`;
+            duzenleLink.href = `http://localhost:8000/map/editlocation/${parkId}`;
             return duzenleLink;
           },
         }),

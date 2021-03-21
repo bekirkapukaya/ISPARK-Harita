@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout as django_logout
 from django.contrib import messages
 
 
@@ -67,6 +67,7 @@ def registerUser(request):
         }
         return render(request, "register.html", context)
 
-
 def logout(request):
-    pass
+    django_logout(request)
+    messages.success(request,"Başarıyla çıkış yaptınız...")
+    return redirect('/user/login')

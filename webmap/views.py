@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.core.serializers import serialize
+from django.contrib.auth.decorators import login_required
 
 from django.views.decorators.csrf import csrf_exempt
 from .models import Ispark
@@ -8,11 +9,11 @@ import requests
 
 IBB_API = "https://data.ibb.gov.tr/api/3/action/datastore_search?resource_id=c3eb0d72-1ce4-4983-a3a8-6b0b4b19fcb9"
 
-
+@login_required(login_url="user:login")
 def mapPage(request):
     return render(request, "map.html")
 
-
+@login_required(login_url="user:login")
 def editLocationPage(request, id):
     gecerliDurak = Ispark.objects.filter(parkId=id)
     durakBilgileri = list(gecerliDurak)
