@@ -6,6 +6,10 @@ require([
   'esri/widgets/Legend',
   'esri/widgets/Expand',
   'esri/widgets/Home',
+  'esri/widgets/LayerList',
+  'esri/widgets/BasemapToggle',
+  'esri/widgets/ScaleBar',
+  'esri/widgets/Compass',
   'esri/PopupTemplate',
   'esri/popup/content/CustomContent',
 ], function (
@@ -16,6 +20,10 @@ require([
   Legend,
   Expand,
   Home,
+  LayerList,
+  BasemapToggle,
+  ScaleBar,
+  Compass,
   PopupTemplate,
   CustomContent
 ) {
@@ -173,8 +181,8 @@ require([
             let duzenleLink = document.createElement('a');
             let linkText = document.createTextNode('Düzenle');
             duzenleLink.appendChild(linkText);
-            duzenleLink.className="btn btn-success"
-            duzenleLink.style="width:100%"
+            duzenleLink.className = 'btn btn-success';
+            duzenleLink.style = 'width:100%';
             duzenleLink.title = 'Düzenle';
             duzenleLink.href = `http://localhost:8000/map/editlocation/${parkId}`;
             return duzenleLink;
@@ -187,8 +195,8 @@ require([
             let silLink = document.createElement('a');
             let linkText = document.createTextNode('Sil');
             silLink.appendChild(linkText);
-            silLink.className="btn btn-danger"
-            silLink.style="width:100%"
+            silLink.className = 'btn btn-danger';
+            silLink.style = 'width:100%';
             silLink.title = 'Sil';
             silLink.href = `http://localhost:8000/map/deletepoint/${parkId}`;
             return silLink;
@@ -230,10 +238,37 @@ require([
     'top-left'
   );
 
+  const layerList = new LayerList({
+    view: view,
+  });
+  view.ui.add(layerList, {
+    position: 'top-right',
+  });
+
+  const basemapToggle = new BasemapToggle({
+    view: view,
+    nextBasemap: 'streets-night-vector',
+  });
+
+  view.ui.add(basemapToggle, 'bottom-right');
+
+  const scaleBar = new ScaleBar({
+    view: view,
+  });
+  view.ui.add(scaleBar, {
+    position: 'bottom-left',
+  });
+
   const legend = new Legend({
     view: view,
     container: 'legendDiv',
   });
+
+  const compass = new Compass({
+    view: view,
+  });
+
+  view.ui.add(compass, 'top-left');
 
   const infoDiv = document.getElementById('infoDiv');
 
