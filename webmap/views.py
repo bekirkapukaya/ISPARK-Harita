@@ -9,14 +9,6 @@ import requests
 IBB_API = "https://data.ibb.gov.tr/api/3/action/datastore_search?resource_id=c3eb0d72-1ce4-4983-a3a8-6b0b4b19fcb9"
 
 
-def loginPage(request):
-    return render(request, "login.html")
-
-
-def registerPage(request):
-    return render(request, "register.html")
-
-
 def mapPage(request):
     return render(request, "map.html")
 
