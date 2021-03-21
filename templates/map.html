@@ -42,7 +42,7 @@
     </div>
   </nav>
   {% if messages %}
-  <div class="messages">
+  <div class="messages" style="position: absolute;margin-left: 50%;">
       {% for message in messages %}
       <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
       {% endfor %}
