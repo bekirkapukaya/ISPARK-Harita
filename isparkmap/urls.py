@@ -20,10 +20,12 @@ from webmap import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.loginPage, name="login"),
+    path('register', views.registerPage, name="register"),
+    path('map', views.mapPage, name="map"),
+    path('editlocation/<int:id>', views.editLocationPage, name="editLocation"),
     path('updatedb', views.updateDatabase),
-    path('map', views.mapPage),
     path('getpoints', views.getPoints),
-    path('editlocation/<int:id>', views.editLocation),
     path('updatepoint/<int:id>', views.updatePoint),
     path('deletepoint/<int:id>', views.deletePoint)
 ]
