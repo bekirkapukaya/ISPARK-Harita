@@ -1,0 +1,1 @@
+-Projenin sorunsuz çalışabilmesi için "isparkmap/settings.py" dosyası içerisindeki 16, 17, 18 satırlarında GDAL kütüphanesi yolu gösterilmelidir. 

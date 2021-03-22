@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+# Bilgisayarda yüklü olan gdal kütüphanesi dizini path olarak gösterilmelidir.
 os.environ['PATH'] = "C:\Tools\Python36\Lib\site-packages\osgeo"
 os.environ['PROJ_LIB'] = "C:\Tools\Python36\Lib\site-packages\osgeo\data\proj"
 GDAL_LIBRARY_PATH = "C:\Tools\Python36\Lib\site-packages\osgeo\gdal301.dll"
