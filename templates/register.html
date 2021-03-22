@@ -9,13 +9,17 @@ Kayıt Ol
 
 <div class="row">
   <div class="col-md-6 offset-md-3">
-      <h3>Kayıt Ol</h3>
-      <hr>
+    <img class="mb-4" src="../static/img/ispark-logo.png" alt="" width="450px" height="150px" style="display: block;margin-left: auto;margin-right: auto;">
+    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center;">ISPARK Durakları Haritası</h1>
+    <br>
+    <h1 class="h4 mb-3 font-weight-bold" style="text-align: center;">Kayıt Ol</h1>
+    <br>
+    <br>
       <form method="post">
         {%csrf_token%}
         {{form|crispy}}
         <br>
-      <button type="submit" class="btn btn-danger">Kayıt Ol</button>
+      <button style="width: 100%;" type="submit" class="btn btn-success">Kayıt Ol</button>
       </form>
   </div>
 </div>

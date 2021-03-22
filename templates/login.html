@@ -9,13 +9,21 @@ Giriş Yap
 
 <div class="row">
   <div class="col-md-6 offset-md-3">
-    <h3>Giriş Yap</h3>
-    <hr>
     <form method="post">
+      <img class="mb-4" src="../static/img/ispark-logo.png" alt="" width="450px" height="150px" style="display: block;margin-left: auto;margin-right: auto;">
+      <h1 class="h3 mb-3 font-weight-normal" style="text-align: center;">ISPARK Durakları Haritası</h1>
+      <br>
+      <h1 class="h4 mb-3 font-weight-bold" style="text-align: center;">Oturum Aç</h1>
+      <br>
+      <br>
       {% csrf_token %}
       {{form|crispy}}
       <br>
-      <button type="submit" class="btn btn-danger">Giriş Yap</button>
+      <div style="display: flex;flex-direction: column;">
+        <button type="submit" class="btn btn-success">Giriş Yap</button>
+        <br>
+        <a href="/register" class="btn btn-danger">Kayıt Ol</a>
+      </div>
     </form>
   </div>
 </div>

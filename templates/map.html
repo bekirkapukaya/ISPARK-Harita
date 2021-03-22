@@ -35,16 +35,18 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="/admin">Yönetici Sayfası</a>
             <a class="dropdown-item" href="/map/updatedb">Durakları Güncelle</a>
-            <a class="dropdown-item" href="/user/logout">Oturumu Kapat</a>
+            <a class="dropdown-item" href="/logout">Oturumu Kapat</a>
           </div>
         </div>
       </div>
     </div>
   </nav>
   {% if messages %}
-  <div class="messages" style="position: absolute;margin-left: 50%;">
+  <div class="messages" style="position: absolute;margin-left: 30%;width: 40%;font-weight: bolder; z-index: 99;">
       {% for message in messages %}
-      <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+      <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      </div>
       {% endfor %}
   </div>
   {% endif %}

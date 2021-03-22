@@ -14,20 +14,20 @@ def loginUser(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            
-            user = authenticate(username=username,password=password)
+
+            user = authenticate(username=username, password=password)
 
             if user is None:
-                messages.warning(request,"Kullanıcı adı veya parola hatalı...")
-                return render(request,"login.html",context)
+                messages.warning(
+                    request, "Kullanıcı adı veya parola hatalı...")
+                return render(request, "login.html", context)
 
-            messages.success(request,"Başarıyla giriş yaptınız...")
+            messages.success(request, "Başarıyla giriş yaptınız...")
             login(request, user)
             return redirect("/map")
 
-        messages.warning(request,"Giriş sırasında hata ile karşılaşıldı...")
+        messages.warning(request, "Giriş sırasında hata ile karşılaşıldı...")
         return render(request, "login.html", context)
-        
 
         return render(request, "login.html", context)
     else:
@@ -50,9 +50,9 @@ def registerUser(request):
 
             newUser.save()
             login(request, newUser)
-            messages.success(request,"Başarıyla kayıt oldunuz...")
+            messages.success(request, "Başarıyla kayıt oldunuz...")
             return redirect("/map")
-        messages.warning(request,"Kayıt sırasında hata ile karşılaşıldı...")
+        messages.warning(request, "Kayıt sırasında hata ile karşılaşıldı...")
 
         form = RegisterForm()
         context = {
@@ -67,7 +67,8 @@ def registerUser(request):
         }
         return render(request, "register.html", context)
 
+
 def logout(request):
     django_logout(request)
-    messages.success(request,"Başarıyla çıkış yaptınız...")
-    return redirect('/user/login')
+    messages.success(request, "Başarıyla çıkış yaptınız...")
+    return redirect('user:login')
